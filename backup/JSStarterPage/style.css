@@ -54,7 +54,11 @@ body {
   padding-left: 10px;
   padding-top: 10px;
 }
-
+.menu-close {
+  cursor: pointer;
+  padding-left: 10px;
+  padding-top: 10px;
+}
 .icon-menu {
   color: #fff;
   cursor: pointer;
