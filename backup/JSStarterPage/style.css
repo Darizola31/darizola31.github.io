@@ -9,10 +9,10 @@ body {
 /* Initial menu */
 .menu {
   background: #202024 url('http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/uber/black-thread.png') repeat left top;
-  left: -200px;  /* start off behind the scenes */
+  left: -285px;  /* start off behind the scenes */
   height: 100%;
   position: fixed;
-  width: 200px;
+  width: 285px;
 }
 
 /* Basic styling */
@@ -24,7 +24,6 @@ body {
      -moz-background-size: cover;
        -o-background-size: cover;
           background-size: cover;
-		  padding-left: 100px;
 }
 
 .menu ul {
