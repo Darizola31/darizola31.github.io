@@ -1,9 +1,6 @@
 var main = function() {
-
   $('.icon-menu').toggle(function() {    
 	$('.menu').animate({
-  $('.icon-menu').click(function() {
-    $('.menu').animate({
       left: '0px'
     }, 200);
 	}, function() {
