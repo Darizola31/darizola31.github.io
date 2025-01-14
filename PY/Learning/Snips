@@ -33,3 +33,44 @@ if __name__ == '__main__':
     print(f'{a} << {b} = {a<<b}')
 ~                                                                                 
 ~                                         
+def xor(x, y):
+    theanswer = x^y
+    return theanswer
+
+def modulus(x, y):
+    theanswer= x % y
+    return theanswer
+if __name__ == '__main__':
+    print(f'xor test: {xor(10, 20)}')
+   #same for modulus
+    print(f'modulus test: {modulus(10, 20)}')
+
+#!/usr/bin/env python3
+import mymath 
+if __name__ == '__main__':
+
+    print(f"You have imported the module named: {mymath.__name__}")
+    name = input(f'Please enter your name: ')
+    print(f'Hello {name}, and welcome to Python.')
+    a = int(input(f'Please enter a number: '))
+    b = int(input(f'Please enter another number: '))
+    answer1 = mymath.xor(a,b)
+    answer2 = mymath.modulus(a,b)
+    print(f'{a} ^ {b} = {answer1}')
+    print(f'{a} % {b} = {answer2}')
+
+
+
+~                                                                                                   
+~                                         
+import random
+ans=5
+guess=0
+while True:
+    guess = random.randint(3,7)
+    print(f"Computer guesses: {guess}")
+    if guess != ans:
+            continue #next iteration of loop
+    print('Winner!')
+    break #break out of loop altogether
+
