@@ -74,3 +74,56 @@ while True:
     print('Winner!')
     break #break out of loop altogether
 
+~
+import argparse
+parser = argparse.ArgumentParser()
+~
+import hashlib
+m= hashlib.sha256()
+m.update(b"Nobody inspects")
+m.update(b" the spammish repetition")
+m.digest
+<built-in method digest of _hashlib.HASH object at 0x7f27906cced0>
+m.digest()
+b'\x03\x1e\xdd}Ae\x15\x93\xc5\xfe\\\x00o\xa5u+7\xfd\xdf\xf7\xbcN\x84:\xa6\xaf\x0c\x95\x0fK\x94\x06'
+m.hexdigest()
+'031edd7d41651593c5fe5c006fa5752b37fddff7bc4e843aa6af0c950f4b9406'
+hashlib.sha256(b"Nobody inspects the spammish repetition").hexdigest()
+'031edd7d41651593c5fe5c006fa5752b37fddff7bc4e843aa6af0c950f4b9406'
+~
+import requests
+import json
+a.requests.get("https://ipapi.co/9.9.9.9/json")
+print(json.dumps(a.json(), indent=4))
+~ 
+import dns.resolver
+resolver = dns.resolver.Resolver(configure=False)
+#Don't use the OS (etc/resolv.conf) defaults ^
+resolver.nameservers = ['9.9.9.9']
+answers = resolver.resolve("rivergumsecurity.org", "NS")
+for a in answers:
+    print(a)
+
+~
+~
+s3 = boto3.client(service_name='s3')
+    all_objects = s3.list_objects_v2(Bucket='flaws.cloud')
+    print('Flaws.Cloud')
+    print('-----------')
+    for o in all_objects['Contents']:
+        key = o['Key']
+        size = o['Size']
+        # Note that last modified is a datetime.datetime object
+        lm = o['LastModified'].strftime('%Y/%m/%d %H:%M:%S')
+        print(f"[*] {key} ({size} bytes), last modified: {lm}")
+
+        # create a byte buffer that looks like a file handle
+        buf = io.BytesIO()
+        s3.download_fileobj(Bucket='flaws.cloud', Key=key, Fileobj=buf)
+        print('[+] initial 30 bytes: [{}]'.format(buf.getvalue()[:30]))
+        print('')
+~
+~
+from datetime import datetime
+a= datetime.utcnow()
+a
