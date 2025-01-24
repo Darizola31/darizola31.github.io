@@ -127,3 +127,32 @@ s3 = boto3.client(service_name='s3')
 from datetime import datetime
 a= datetime.utcnow()
 a
+
+------------ENCRYPTION--------------------
+import base64
+import hashlib
+import os
+
+from cryptography.hazmat.backends import default_backend
+from cryptogrpahy.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.fernet import Fernet
+
+# SALT = <Insert salt here>
+
+def encode_message(message,password,salt):
+    
+
+
+
+#derive encryption key from password using PBKDF2
+    kdf = PBKDF2HMAC(algorithm=hashes.sha256,
+                    iterations=10000,
+                    salt = salt,
+                    length=32,
+                    backend=default_backend())
+    key = bas64.urlsafe_b64encode(kdf.derive(password))
+#Encrypt the message using the derived key
+fernet = Fernet(key)
+encrypted_message = fernet.encrypt(message.encode())
+return encrypted_message
