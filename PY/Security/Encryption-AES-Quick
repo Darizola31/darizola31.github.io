@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+
+import base64
+import hashlib
+import os
+#crypt imports
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.fernet import Fernet
+
+SALT = b'xaa\x98\xa5\xde\xd5\xd8\xa6\x01\x16\x7f\x5c\x1a\xac\xe9\x60'
+
+def encode_message(message ,password ,salt):
+    #AES encryption
+    #derive encryption key from password using PBKDF2
+    kdf = PBKDF2HMAC(algorithm=hashes.SHA256,
+                    iterations=10000,
+                    salt = salt,
+                    length=32,
+                    backend=default_backend())
+    key = base64.urlsafe_b64encode(kdf.derive(password))
+    #Encrypt the message using the derived key
+    fernet = Fernet(key)
+    encrypted_message = fernet.encrypt(message.encode())
+    return encrypted_message
+
+def decode_message(encrypted_message, password, salt):
+    kdf = PBKDF2HMAC(algorithm=hashes.SHA256, 
+                    iterations=10000,
+                    salt = salt, 
+                    length=32, 
+                    backend=default_backend())
+
+    key = base64.urlsafe_b64encode(kdf.derive(password))
+    #Decrypt
+    fernet = Fernet(key)
+    decrypted_message = fernet.decrypt(encrypted_message).decode()
+message = "This is a message to me"
+password = "password123".encode()
+
+encrypted_message = encode_message(message, password, SALT)
+decrypted_message = decode_message(encrypted_message, password, SALT)
+
+print("original message: ",message)
+print("decrypted message: ",decrypted_message)
+print("encrypted: ",encrypted_message)
+
